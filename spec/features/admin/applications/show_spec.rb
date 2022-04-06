@@ -1,7 +1,6 @@
 require "rails_helper"
-RSpec.describe 'Admin application show page' do
-  
-  describe 'Approving or denying a pet' do
+RSpec.describe "Admin application show page" do
+  describe "Approving or denying a pet" do
     before :each do
       mystery_shelter = Shelter.create(name: "Mystery Building", city: "Irvine CA", foster_program: false, rank: 9)
       @scooby = mystery_shelter.pets.create(name: "Scooby", age: 2, breed: "Great Dane", adoptable: true)
@@ -14,53 +13,51 @@ RSpec.describe 'Admin application show page' do
       @app2 = PetApplication.create(pet: @ralph, application: @bobby)
       @app3 = PetApplication.create(pet: @scooby, application: @joe)
       @app4 = PetApplication.create(pet: @bilbo, application: @joe)
-    end 
-    
+    end
+
     it "has an approval and deny button next to every pet" do
       visit "/admin/applications/#{@bobby.id}"
       within("#app-#{@app1.id}") do
-        expect(page).to have_content('Scooby')
-        click_button('Approve')
+        expect(page).to have_content("Scooby")
+        click_button("Approve")
         expect(current_path).to eq("/admin/applications/#{@bobby.id}")
-        expect(page).to have_content('Approved')
-        expect(page).to_not have_content('Denied')
-        expect(page).to_not have_content('Deny')
+        expect(page).to have_content("Approved")
+        expect(page).to_not have_content("Denied")
+        expect(page).to_not have_content("Deny")
       end
-      
+
       within("#app-#{@app2.id}") do
-        save_and_open_page
-        expect(page).to have_content('Ralph')
-        expect(page).to have_button('Approve')
-        expect(page).to have_button('Deny')
-      end 
+        expect(page).to have_content("Ralph")
+        expect(page).to have_button("Approve")
+        expect(page).to have_button("Deny")
+      end
     end
-    
+
     it "after approval or denying a pet, buttons go away and status is displayed" do
       visit "/admin/applications/#{@bobby.id}"
       within("#app-#{@app1.id}") do
-        click_button('Approve')
-        expect(page).to_not have_button('Approve')
-        expect(page).to_not have_button('Deny')
-        expect(page).to have_content('Approved')
-      end   
+        click_button("Approve")
+        expect(page).to_not have_button("Approve")
+        expect(page).to_not have_button("Deny")
+        expect(page).to have_content("Approved")
+      end
       within("#app-#{@app2.id}") do
-        click_button('Deny')
-        expect(page).to have_content('Denied')
-        expect(page).to_not have_button('Approve')
-        expect(page).to_not have_button('Deny')
-      end 
+        click_button("Deny")
+        expect(page).to have_content("Denied")
+        expect(page).to_not have_button("Approve")
+        expect(page).to_not have_button("Deny")
+      end
     end
-    
+
     it "approving has no effect on other applications " do
       visit "/admin/applications/#{@bobby.id}"
       within("#app-#{@app1.id}") do
-        click_button('Approve')
-      end 
+        click_button("Approve")
+      end
       visit "/admin/applications/#{@joe.id}"
-      expect(page).to_not have_content('Approved')
-      expect(page).to_not have_content('Denied')
-      expect(page).to have_content('Scooby')
+      expect(page).to_not have_content("Approved")
+      expect(page).to_not have_content("Denied")
+      expect(page).to have_content("Scooby")
     end
-    
   end
 end
