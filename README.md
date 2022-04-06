@@ -1,7 +1,10 @@
 # Adopt, don't Shop
 
 ### Existing database design
-![visual-schema.png](https://i.postimg.cc/0ywZgQ1W/visual-schema.png)
+![Screen Shot 2022-04-06 at 5 51 13 PM](https://user-images.githubusercontent.com/97201304/162092815-9b7052f1-1661-471b-8de6-c905d210a3c7.png)
+
+## Phillip and Reuben's Define the relationship
+[ADS - DTR.pdf](https://github.com/phillipkamps/adopt_dont_shop/files/8436995/ADS.-.DTR.pdf)
 
 ## Learning Goals
 
